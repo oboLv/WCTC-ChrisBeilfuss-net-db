@@ -45,9 +45,9 @@ namespace NETDBassign1
                     {
                         string[] stringArray = toArray.Split(',');
                         int ticketIDOld = Convert.ToInt32(stringArray[0]);
-                        ticketID = ticketIDOld++;
+                        ticketID = ticketIDOld + 1;
                     }
-                    sR.Close();
+                    
                 }
                 Console.WriteLine(ticketID);
                 Console.WriteLine("Enter the ticket summary");
