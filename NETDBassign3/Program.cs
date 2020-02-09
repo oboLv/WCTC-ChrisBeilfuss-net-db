@@ -42,7 +42,7 @@ namespace NETDBassign3
                 string rough = sR.ReadLine();
                 string[] split = rough.Split(',');
 
-                int splitLength = split.Length();//fix broken titles
+                int splitLength = split.Length;//fix broken titles
                 bool brokenTitle = false;
                 string fixedTitle = "";
                 if(splitLength > 3)
@@ -53,9 +53,18 @@ namespace NETDBassign3
                         }
                         brokenTitle = true;
                     }
+                int movieID = 0;
 
                 string[] genres = split[splitLength - 1].Split('|');
-                int movieID = Convert.ToInt32(split[0]);
+                try 
+	            {	        
+		            movieID = Convert.ToInt32(split[0]);
+	            }
+	            catch (FormatException)
+	            {
+		            break;
+	            }
+          
                 movieIDs.Add(movieID, movieID);
                 if(!brokenTitle)
                     {
