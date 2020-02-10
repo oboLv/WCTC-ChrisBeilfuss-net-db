@@ -62,12 +62,12 @@ namespace NETDBassign3
                 
                 string[] genres = split[splitLength - 1].Split('|');
                 try 
-	            {	        
-		            movieID = Convert.ToInt32(split[0]);
+	            {
+                    movieID = Int32.Parse(split[0]);
 	            }
 	            catch (FormatException)
 	            {
-		            break;
+                    break;
 	            }
           
                 movieIDs.Add(movieID);
@@ -157,6 +157,7 @@ namespace NETDBassign3
                         
                     }
             }
+            
             sR.Close();
             bool exit = false;
             while (!exit)
@@ -185,7 +186,16 @@ namespace NETDBassign3
                     Console.WriteLine("18. View IMAX Movies");
                     Console.WriteLine("19. View Mystery Movies");
                     Console.WriteLine("20. Return To Menu");
-                    
+                    Console.WriteLine(movieIDs.Count());
+                    Console.WriteLine(movieTitles.Count());
+                    Console.WriteLine(movieGenres.Count());
+                    Console.WriteLine(action.Count());
+                    Console.WriteLine(noir.Count());
+                    Console.WriteLine(musical.Count());
+                    //foreach(int i in movieIDs)
+                    //{
+                    //    Console.WriteLine(i);
+                    //}
                     bool view = false;
                     while (!view)
                     {
@@ -195,92 +205,311 @@ namespace NETDBassign3
                         {
                             //Console.Clear();
                             Console.WriteLine(displayFormat, "ID", "Title", "Genres");
-                            for(int i = 0; i < movieIDs.Count(); i++)
+                            
+                            for(int i = 0; i < action.Count(); i++)
                             {
-                                int id = movieIDs[i];
+                                int id = action[i];
+                                string g = movieGenres[id];
                                 string title = movieTitles[id];
-                                Console.WriteLine(displayFormat, id, title, "edfrba");
+                                Console.WriteLine(displayFormat, id, title, g);
                                 view = true;
                                 exit = true;
                             }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "2")
                         {
                             Console.Clear();
-
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            Console.WriteLine(movieIDs.Count());
+                            for (int i = 0; i < movieIDs.Count(); i++)
+                            {
+                                int id = movieIDs[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "3")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < adventure.Count(); i++)
+                            {
+                                int id = adventure[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "4")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < drama.Count(); i++)
+                            {
+                                int id = drama[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "5")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < comedy.Count(); i++)
+                            {
+                                int id = comedy[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "6")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < musical.Count(); i++)
+                            {
+                                int id = musical[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "7")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < fantasy.Count(); i++)
+                            {
+                                int id = fantasy[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "8")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < scifi.Count(); i++)
+                            {
+                                int id = scifi[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "9")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < thriller.Count(); i++)
+                            {
+                                int id = thriller[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "10")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < children.Count(); i++)
+                            {
+                                int id = children[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "11")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < horror.Count(); i++)
+                            {
+                                int id = horror[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "12")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < animation.Count(); i++)
+                            {
+                                int id = animation[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "13")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < crime.Count(); i++)
+                            {
+                                int id = crime[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "14")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < war.Count(); i++)
+                            {
+                                int id = war[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "15")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < noir.Count(); i++)
+                            {
+                                int id = noir[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "16")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < western.Count(); i++)
+                            {
+                                int id = western[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "17")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < documentary.Count(); i++)
+                            {
+                                int id = documentary[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "18")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < imax.Count(); i++)
+                            {
+                                int id = imax[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "19")
                         {
                             Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            
+                            for (int i = 0; i < mystery.Count(); i++)
+                            {
+                                int id = mystery[i];
+                                string g = movieGenres[id];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, g);
+                                view = true;
+                                exit = true;
+                            }
+                            Console.ReadKey();
                         }
                         else if (viewInput == "20")
                         {
                             Console.Clear();
                             view = true;
+                            exit = true;
                         }
                         else
                         {
