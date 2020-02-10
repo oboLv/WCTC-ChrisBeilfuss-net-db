@@ -40,7 +40,7 @@ namespace NETDBassign3
 
             
             StreamReader sR = new StreamReader("movies.csv");
-            //populate dictionaries
+            //fill dictionaries
             while (!sR.EndOfStream)
             {
                 string rough = sR.ReadLine();
@@ -53,7 +53,7 @@ namespace NETDBassign3
                     {
                         for(int i = 1; i <= splitLength-1; i++)
                         {
-                            fixedTitle = $"{fixedTitle} + {split[i]}";
+                            fixedTitle = fixedTitle + "," + split[i];
                         }
                         brokenTitle = true;
                     }
@@ -569,7 +569,7 @@ namespace NETDBassign3
                     }
                     Console.WriteLine("Movie added");
                     string newMovie = newID + "," + newTitle + "," + newGenre;
-                    StreamWriter sW = new StreamWriter("movies.csv");
+                    StreamWriter sW = new StreamWriter("movies.csv", true);
                     sW.WriteLine(newMovie);
                     sW.Close();
                     exit = true;
