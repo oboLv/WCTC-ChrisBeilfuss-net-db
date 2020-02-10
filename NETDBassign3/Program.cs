@@ -186,12 +186,12 @@ namespace NETDBassign3
                     Console.WriteLine("18. View IMAX Movies");
                     Console.WriteLine("19. View Mystery Movies");
                     Console.WriteLine("20. Return To Menu");
-                    Console.WriteLine(movieIDs.Count());
-                    Console.WriteLine(movieTitles.Count());
-                    Console.WriteLine(movieGenres.Count());
-                    Console.WriteLine(action.Count());
-                    Console.WriteLine(noir.Count());
-                    Console.WriteLine(musical.Count());
+                    //Console.WriteLine(movieIDs.Count());
+                    //Console.WriteLine(movieTitles.Count());
+                    //Console.WriteLine(movieGenres.Count());
+                    //Console.WriteLine(action.Count());
+                    //Console.WriteLine(noir.Count());
+                    //Console.WriteLine(musical.Count());
                     //foreach(int i in movieIDs)
                     //{
                     //    Console.WriteLine(i);
@@ -206,9 +206,9 @@ namespace NETDBassign3
                             //Console.Clear();
                             Console.WriteLine(displayFormat, "ID", "Title", "Genres");
                             
-                            for(int i = 0; i < action.Count(); i++)
+                            for(int i = 0; i < movieIDs.Count(); i++)
                             {
-                                int id = action[i];
+                                int id = movieIDs[i];
                                 string g = movieGenres[id];
                                 string title = movieTitles[id];
                                 Console.WriteLine(displayFormat, id, title, g);
@@ -222,9 +222,9 @@ namespace NETDBassign3
                             Console.Clear();
                             Console.WriteLine(displayFormat, "ID", "Title", "Genres");
                             Console.WriteLine(movieIDs.Count());
-                            for (int i = 0; i < movieIDs.Count(); i++)
+                            for (int i = 0; i < action.Count(); i++)
                             {
-                                int id = movieIDs[i];
+                                int id = action[i];
                                 string g = movieGenres[id];
                                 string title = movieTitles[id];
                                 Console.WriteLine(displayFormat, id, title, g);
@@ -515,19 +515,72 @@ namespace NETDBassign3
                         {
                             Console.WriteLine("Enter a number 1-20");
                         }
-                        
                     }
-
-
                 }
                 //add movie
                 else if (userInput == "2")
                 {
+                    Console.Clear();
+                    Console.WriteLine("Enter the movie ID");
+                    string newID = Console.ReadLine();
+                    int checkID;
+                    bool pass = false;
+                    while (!pass)
+                    {
+                        while (!Int32.TryParse(newID, out checkID))
+                        {
+                            Console.WriteLine("Invalid Input");
+                            newID = Console.ReadLine();
+                        }
+                        if (movieIDs.Contains(checkID))
+                        {
+                            Console.WriteLine("That Movie ID already exists. Choose another");
+                            newID = Console.ReadLine();
+                        }
+                        else
+                        {
+                            pass = true;
+                        }
+                    }
 
+                    Console.WriteLine("Enter the title of the movie");
+                    string newTitle = Console.ReadLine();
+                    Console.WriteLine("Enter genre");
+                    bool genreBool = false;
+                    string newGenre = Console.ReadLine();
+                    while (!genreBool)
+                    {
+                        Console.WriteLine("Enter additional genre? (Y/N)");
+                        string add = Console.ReadLine().ToUpper();
+                        if (add == "Y")
+                        {
+                            Console.WriteLine("Enter genre");
+                            string extraGenre = Console.ReadLine();
+                            newGenre = newGenre + "|" + extraGenre;
+                        }
+                        else if (add == "N")
+                        {
+                            genreBool = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid unput try again");
+                        }
+                    }
+                    Console.WriteLine("Movie added");
+                    string newMovie = newID + "," + newTitle + "," + newGenre;
+                    StreamWriter sW = new StreamWriter("movies.csv");
+                    sW.WriteLine(newMovie);
+                    sW.Close();
+                    exit = true;
+                }
+                else if (userInput == "3")
+                {
+                    exit = true;
                 }
                 else
                 {
-
+                    Console.WriteLine("Invalid Input");
                 }
             }
         }
