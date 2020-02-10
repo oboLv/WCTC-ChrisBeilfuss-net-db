@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using NLog;
 namespace NETDBassign3
 {
     class Program
@@ -15,8 +16,9 @@ namespace NETDBassign3
             Console.WriteLine("3. Exit App");
             string userInput = Console.ReadLine();
             //dictionaries/lists
-            Dictionary<int, int> movieIDs = new Dictionary<int, int>();
+            List<int> movieIDs = new List<int>();
             Dictionary<int, string> movieTitles = new Dictionary<int, string>();
+            Dictionary<int, string> movieGenres = new Dictionary<int, string>();
             List<int> action = new List<int>();
             List<int> adventure = new List<int>();
             List<int> drama = new List<int>();
@@ -36,8 +38,10 @@ namespace NETDBassign3
             List<int> imax = new List<int>();
             List<int> mystery = new List<int>();
 
+            
             StreamReader sR = new StreamReader("movies.csv");
-            while(!sR.EndOfStream)//populate dictionaries
+            //populate dictionaries
+            while (!sR.EndOfStream)
             {
                 string rough = sR.ReadLine();
                 string[] split = rough.Split(',');
@@ -53,8 +57,9 @@ namespace NETDBassign3
                         }
                         brokenTitle = true;
                     }
-                int movieID = 0;
-
+                Console.WriteLine(fixedTitle);
+                int movieID;
+                
                 string[] genres = split[splitLength - 1].Split('|');
                 try 
 	            {	        
@@ -65,8 +70,9 @@ namespace NETDBassign3
 		            break;
 	            }
           
-                movieIDs.Add(movieID, movieID);
-                if(!brokenTitle)
+                movieIDs.Add(movieID);
+                movieGenres.Add(movieID, split[splitLength-1]);
+                if (!brokenTitle)
                     {
                         movieTitles.Add(movieID, fixedTitle);
                     }
@@ -151,19 +157,149 @@ namespace NETDBassign3
                         
                     }
             }
-
-            if(userInput == "1")
+            sR.Close();
+            bool exit = false;
+            while (!exit)
             {
-                
+                //view movies
+                if (userInput == "1")
+                {
+                    Console.Clear();
+                    Console.WriteLine("1. View All Movies");
+                    Console.WriteLine("2. View Action Movies");
+                    Console.WriteLine("3. View Adventure Movies");
+                    Console.WriteLine("4. View Drama Movies");
+                    Console.WriteLine("5. View Comedy Movies");
+                    Console.WriteLine("6. View Musical Movies");
+                    Console.WriteLine("7. View Fantasy Movies");
+                    Console.WriteLine("8. View Sci-Fi Movies");
+                    Console.WriteLine("9. View Thriller Movies");
+                    Console.WriteLine("10. View Children Movies");
+                    Console.WriteLine("11. View Horror Movies");
+                    Console.WriteLine("12. View Animation Movies");
+                    Console.WriteLine("13. View Crime Movies");
+                    Console.WriteLine("14. View War Movies");
+                    Console.WriteLine("15. View Film-Noir Movies");
+                    Console.WriteLine("16. View Western Movies");
+                    Console.WriteLine("17. View Documentary Movies");
+                    Console.WriteLine("18. View IMAX Movies");
+                    Console.WriteLine("19. View Mystery Movies");
+                    Console.WriteLine("20. Return To Menu");
+                    
+                    bool view = false;
+                    while (!view)
+                    {
+                        string viewInput = Console.ReadLine();
+                        string displayFormat = "{0,-6}\t{1,-45}\t{2}";
+                        if(viewInput == "1")
+                        {
+                            //Console.Clear();
+                            Console.WriteLine(displayFormat, "ID", "Title", "Genres");
+                            for(int i = 0; i < movieIDs.Count(); i++)
+                            {
+                                int id = movieIDs[i];
+                                string title = movieTitles[id];
+                                Console.WriteLine(displayFormat, id, title, "edfrba");
+                                view = true;
+                                exit = true;
+                            }
+                        }
+                        else if (viewInput == "2")
+                        {
+                            Console.Clear();
 
-            }
-            else if(userInput == "2")
-            {
+                        }
+                        else if (viewInput == "3")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "4")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "5")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "6")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "7")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "8")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "9")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "10")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "11")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "12")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "13")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "14")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "15")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "16")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "17")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "18")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "19")
+                        {
+                            Console.Clear();
+                        }
+                        else if (viewInput == "20")
+                        {
+                            Console.Clear();
+                            view = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter a number 1-20");
+                        }
+                        
+                    }
 
-            }
-            else
-            {
 
+                }
+                //add movie
+                else if (userInput == "2")
+                {
+
+                }
+                else
+                {
+
+                }
             }
         }
     }
