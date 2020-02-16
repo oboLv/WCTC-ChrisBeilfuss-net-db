@@ -14,10 +14,9 @@ namespace NETDBassign1
             bool exit = false;
             while (!exit)
             {
-                Console.Clear();
-                Console.WriteLine("1. View Tickets");
-                Console.WriteLine("2. Create New Ticket");
-                Console.WriteLine("3. Exit Application");
+                List<Ticket> tickets = new List<Ticket>();
+                var ui = new UI();
+                ui.MainMenu();
                 string userInput = Console.ReadLine();
                 if (userInput == "1")//view tickets
                 {
