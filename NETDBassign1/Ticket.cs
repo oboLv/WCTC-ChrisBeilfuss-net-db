@@ -18,9 +18,26 @@ namespace NETDBassign1
             Submitter = sub;
             Assigned = assi;
             Watching = watch;
+        }
+        public Ticket()
+        {
 
         }
-        
+        public static Ticket CreateTicket()
+        {
+            Ticket newTicket = new Ticket();
+            Console.WriteLine("Enter the ticket summary");
+            newTicket.Summary = Console.ReadLine();
+            Console.WriteLine("Enter the ticket status");
+            newTicket.Status = Console.ReadLine();
+            Console.WriteLine("Enter the ticket priority");
+            newTicket.Priority = Console.ReadLine();
+            Console.WriteLine("Enter the ticket submitter");
+            newTicket.Submitter = Console.ReadLine();
+            Console.WriteLine("Enter who is assigned to this ticket");
+            newTicket.Assigned = Console.ReadLine();
+            return newTicket;
+        }
         
 
 

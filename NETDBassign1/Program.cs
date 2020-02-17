@@ -16,8 +16,10 @@ namespace NETDBassign1
             {
                 List<Ticket> tickets = new List<Ticket>();
                 var ui = new UI();
-                ui.MainMenu();
-                string userInput = Console.ReadLine();
+
+                string userInput = ui.MainMenu();
+
+
                 if (userInput == "1")//view tickets
                 {
                     int lines = 0;
@@ -56,21 +58,13 @@ namespace NETDBassign1
 
                     }
                     sR.Close();
-                    Console.WriteLine("Enter the ticket summary");
-                    string ticketSummary = Console.ReadLine();
-                    Console.WriteLine("Enter the ticket status");
-                    string ticketStatus = Console.ReadLine();
-                    Console.WriteLine("Enter the ticket priority");
-                    string ticketPriority = Console.ReadLine();
-                    Console.WriteLine("Enter the ticket submitter");
-                    string ticketSubmitter = Console.ReadLine();
-                    Console.WriteLine("Enter who is assigned to this ticket");
-                    string ticketAssigned = Console.ReadLine();
-                    string ticketWatching = $"{ticketSubmitter}|{ticketAssigned}|Bill Jones";
-                    string ticketCSV = "{0},{1},{2},{3},{4},{5},{6}";
-                    StreamWriter sW = new StreamWriter(file, true);
-                    sW.WriteLine(ticketCSV, ticketID, ticketSummary, ticketStatus, ticketPriority, ticketSubmitter, ticketAssigned, ticketWatching);
-                    sW.Close();
+                    tickets.Add(Ticket.CreateTicket());
+                    
+                    //string ticketWatching = $"{ticketSubmitter}|{ticketAssigned}|Bill Jones";
+                    //string ticketCSV = "{0},{1},{2},{3},{4},{5},{6}";
+                    //StreamWriter sW = new StreamWriter(file, true);
+                    //sW.WriteLine(ticketCSV, ticketID, ticketSummary, ticketStatus, ticketPriority, ticketSubmitter, ticketAssigned, ticketWatching);
+                    //sW.Close();
                 }
                 else if (userInput == "3")//exit app
                 {

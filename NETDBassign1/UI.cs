@@ -8,12 +8,14 @@ namespace NETDBassign1
 {
     class UI
     {
-        public void MainMenu()
+        public string MainMenu()
         {
             Console.Clear();
             Console.WriteLine("1. View Tickets");
             Console.WriteLine("2. Create New Ticket");
             Console.WriteLine("3. Exit Application");
+            string input = Console.ReadLine();
+            return input;
         }
     }
 }
