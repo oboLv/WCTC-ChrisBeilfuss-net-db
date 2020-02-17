@@ -19,52 +19,52 @@ namespace NETDBassign1
 
                 string userInput = ui.MainMenu();
 
-
+                StreamReader sR = new StreamReader(file);
+                sR.ReadLine();
+                while (!sR.EndOfStream)
+                {
+                    Ticket ticket = new Ticket(sR.ReadLine());
+                    tickets.Add(ticket);
+                }
+                sR.Close();
                 if (userInput == "1")//view tickets
                 {
                     int lines = 0;
-                    string format = "{0,-10}\t{1,-25}\t{2,-10}\t{3,-10}\t{4,-10}\t{5,-10}\t{6,-40}";
-                    StreamReader sR = new StreamReader(file);
-                    while (!sR.EndOfStream)
+                    
+                    
+                    foreach (Ticket t in tickets)
                     {
-                        string toArray = sR.ReadLine();
-
-                        string[] stringArray = toArray.Split(',');
-
-                        if (lines == 1)
+                        string format = "{0,-10}\t{1,-25}\t{2,-10}\t{3,-10}\t{4,-10}\t{5,-10}\t{6,-40}";
+                        if(lines == 0)
                         {
+                            Console.WriteLine(format, "TicketID", "Summary", "Status", "Priority", "Submitter", "Assigned", "Watching");
                             Console.WriteLine(format, "-------", "-------", "-------", "-------", "-------", "-------", "-------");
+                            lines++;
                         }
-                        Console.WriteLine(format, stringArray[0], stringArray[1], stringArray[2], stringArray[3], stringArray[4], stringArray[5], stringArray[6]);
-                        lines++;
+                        Console.WriteLine(ui.Table(t));
                     }
-                    sR.Close();
+                    
                     Console.WriteLine("Press any key to proceed");
                     Console.ReadKey();
                 }
                 else if (userInput == "2")//create new ticket
                 {
                     int ticketID = 0;
-                    StreamReader sR = new StreamReader(file);
-                    while (!sR.EndOfStream)//get next TicketID number
+                    foreach(Ticket ticket in tickets)
                     {
-                        string toArray = sR.ReadLine();
-                        if (sR.EndOfStream)
+                        if(ticket.ID > ticketID)
                         {
-                            string[] stringArray = toArray.Split(',');
-                            int ticketIDOld = Convert.ToInt32(stringArray[0]);
-                            ticketID = ticketIDOld + 1;
+                            ticketID = ticket.ID;
                         }
-
                     }
-                    sR.Close();
-                    tickets.Add(Ticket.CreateTicket());
-                    
-                    //string ticketWatching = $"{ticketSubmitter}|{ticketAssigned}|Bill Jones";
-                    //string ticketCSV = "{0},{1},{2},{3},{4},{5},{6}";
-                    //StreamWriter sW = new StreamWriter(file, true);
-                    //sW.WriteLine(ticketCSV, ticketID, ticketSummary, ticketStatus, ticketPriority, ticketSubmitter, ticketAssigned, ticketWatching);
-                    //sW.Close();
+                    tickets.Add(Ticket.CreateTicket(ticketID));
+                    StreamWriter sW = new StreamWriter(file, true);
+                    foreach(Ticket ticket in tickets)
+                    {
+                        string newTicket = Ticket.TicketCSVFormat(ticket);
+                        sW.WriteLine(newTicket);
+                    }
+                    sW.Close();
                 }
                 else if (userInput == "3")//exit app
                 {

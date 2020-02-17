@@ -17,5 +17,10 @@ namespace NETDBassign1
             string input = Console.ReadLine();
             return input;
         }
+        public string Table(Ticket t)
+        {
+            string format = $"{t.ID,-10}\t{t.Summary,-25}\t{t.Status,-10}\t{t.Priority,-10}\t{t.Submitter,-10}\t{t.Assigned,-10}\t{t.Watching,-40}";
+            return format;
+        }
     }
 }
