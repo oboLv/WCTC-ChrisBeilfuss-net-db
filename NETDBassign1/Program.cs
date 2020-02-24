@@ -10,7 +10,9 @@ namespace TicketApp
     {
         static void Main(string[] args)
         {
-            string file = "Tickets.csv";
+            string bugFile = "Tickets.csv";
+            string enhanceFile = "Enhancements.csv";
+            string taskFile = "Task.csv";
             bool exit = false;
             while (!exit)
             {
@@ -19,15 +21,15 @@ namespace TicketApp
 
                 string userInput = ui.MainMenu();
 
-                StreamReader sR = new StreamReader(file);
+                StreamReader sR = new StreamReader(bugFile);
                 sR.ReadLine();
                 while (!sR.EndOfStream)
                 {
-                    Ticket ticket = new Ticket(sR.ReadLine());
-                    tickets.Add(ticket);
+                    Bug ticket = new Bug(sR.ReadLine());
+                    //tickets.Add(ticket);
                 }
                 sR.Close();
-                if (userInput == "1")//view tickets
+                if (userInput == "1")//view bug tickets
                 {
                     int lines = 0;
                     
@@ -57,11 +59,11 @@ namespace TicketApp
                             ticketID = ticket.ID;
                         }
                     }
-                    tickets.Add(Ticket.CreateTicket(ticketID));
-                    StreamWriter sW = new StreamWriter(file, true);
+                    tickets.Add(Bug.CreateBug(ticketID));
+                    StreamWriter sW = new StreamWriter(bugFile, true);
                     foreach(Ticket ticket in tickets)
                     {
-                        string newTicket = Ticket.TicketCSVFormat(ticket);
+                        string newTicket = Bug.BugCSVFormat(ticket);
                         sW.WriteLine(newTicket);
                     }
                     sW.Close();

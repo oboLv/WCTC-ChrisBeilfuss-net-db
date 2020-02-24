@@ -8,6 +8,7 @@ namespace TicketApp
 {
     class Task : Ticket
     {
-
+        public string ProjectName { get; set; }
+        public string DueDate { get; set; }
     }
 }
