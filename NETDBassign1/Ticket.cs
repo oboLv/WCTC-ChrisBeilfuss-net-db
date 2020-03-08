@@ -9,14 +9,6 @@ namespace TicketApp
 {
     public abstract class Ticket
     {
-
-
-
-
-
-
-
-
         public int ID { get; set; }
         public string Summary { get; set; }
         public string Priority { get; set; }
