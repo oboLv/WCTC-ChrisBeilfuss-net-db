@@ -33,10 +33,10 @@ namespace TicketApp
             return newTicket;
         }
 
-        public static string TaskCSVFormat(Task ticket)
+        public string TaskCSVFormat()
         {
-            string ticketWatching = $"{ticket.Submitter}|{ticket.Watching}|Bill Jones";
-            string ticketCSV = $"{ticket.ID},{ticket.Summary},{ticket.Status},{ticket.Priority},{ticket.Submitter},{ticket.Assigned},{ticketWatching},{ticket.ProjectName},{ticket.DueDate}";
+            string ticketWatching = $"{Submitter}|{Watching}|Bill Jones";
+            string ticketCSV = $"{ID},{Summary},{Status},{Priority},{Submitter},{Assigned},{ticketWatching},{ProjectName},{DueDate}";
             return ticketCSV;
         }
         public Task(string s)
@@ -52,7 +52,11 @@ namespace TicketApp
             ProjectName = arr[7];
             DueDate = arr[8];
         }
-
+        public void PrintTask()
+        {
+            string format = $"{ID,-10}\t{Summary,-25}\t{Status,-10}\t{Priority,-10}\t{Submitter,-10}\t{Assigned,-10}\t{Watching,-40}\t{ProjectName,-10}\t{DueDate,-10}";
+            Console.WriteLine(format);
+        }
         public string ProjectName { get; set; }
         public string DueDate { get; set; }
     }

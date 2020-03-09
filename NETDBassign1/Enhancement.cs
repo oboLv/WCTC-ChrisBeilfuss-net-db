@@ -36,10 +36,10 @@ namespace TicketApp
             newTicket.Estimate = Console.ReadLine();
             return newTicket;
         }
-        public static string EnhanvementCSVFormat(Enhancement ticket)
+        public string EnhancementCSVFormat()
         {
-            string ticketWatching = $"{ticket.Submitter}|{ticket.Watching}|Bill Jones";
-            string ticketCSV = $"{ticket.ID},{ticket.Summary},{ticket.Status},{ticket.Priority},{ticket.Submitter},{ticket.Assigned},{ticketWatching},{ticket.Software},{ticket.Cost},{ticket.Reason},{ticket.Estimate}";
+            string ticketWatching = $"{Submitter}|{Watching}|Bill Jones";
+            string ticketCSV = $"{ID},{Summary},{Status},{Priority},{Submitter},{Assigned},{ticketWatching},{Software},{Cost},{Reason},{Estimate}";
             return ticketCSV;
         }
         public Enhancement(string s)
@@ -57,7 +57,11 @@ namespace TicketApp
             Reason = arr[9];
             Estimate = arr[10];
         }
-
+        public void PrintEnhancement()
+        {
+            string format = $"{ID,-10}\t{Summary,-25}\t{Status,-10}\t{Priority,-10}\t{Submitter,-10}\t{Assigned,-10}\t{Watching,-40}\t{Software,-10}\t{Cost,-10}\t{Reason,-10}\t{Estimate,-10}";
+            Console.WriteLine(format);
+        }
         public string Software { get; set; }
         public string Cost { get; set; }
         public string Reason { get; set; }

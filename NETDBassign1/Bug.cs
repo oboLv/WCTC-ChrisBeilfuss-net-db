@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.IO;
 namespace TicketApp
 {
     class Bug : Ticket
@@ -40,12 +40,13 @@ namespace TicketApp
             Console.WriteLine("Enter bug severity");
             newTicket.Severity = Console.ReadLine();
             return newTicket;
+            
         }
 
-        public static string BugCSVFormat(Bug ticket)
+        public string BugCSVFormat()
         {
-            string ticketWatching = $"{ticket.Submitter}|{ticket.Watching}|Bill Jones";
-            string ticketCSV = $"{ticket.ID},{ticket.Summary},{ticket.Status},{ticket.Priority},{ticket.Submitter},{ticket.Assigned},{ticketWatching},{ticket.Severity}";
+            string ticketWatching = $"{Submitter}|{Watching}|Bill Jones";
+            string ticketCSV = $"{ID},{Summary},{Status},{Priority},{Submitter},{Assigned},{ticketWatching},{Severity}";
             return ticketCSV;
         }
 
@@ -60,6 +61,11 @@ namespace TicketApp
             Assigned = arr[5];
             Watching = arr[6];
             Severity = arr[7];
+        }
+        public void PrintBug()
+        {
+            string format = $"{ID,-10}\t{Summary,-25}\t{Status,-10}\t{Priority,-10}\t{Submitter,-10}\t{Assigned,-10}\t{Watching,-40}\t{Severity,-10}";
+            Console.WriteLine(format);
         }
         public string Severity { get; set; }
     }

@@ -10,65 +10,70 @@ namespace TicketApp
     {
         static void Main(string[] args)
         {
-            string bugFile = "Tickets.csv";
-            string enhanceFile = "Enhancements.csv";
-            string taskFile = "Task.csv";
             bool exit = false;
             while (!exit)
             {
                 List<Ticket> tickets = new List<Ticket>();
+                List<Bug> bugs = new List<Bug>();
+                List<Enhancement> enhancements = new List<Enhancement>();
+                List<Task> tasks = new List<Task>();
                 var ui = new UI();
 
                 string userInput = ui.MainMenu();
 
-                StreamReader sR = new StreamReader(bugFile);
-                sR.ReadLine();
-                while (!sR.EndOfStream)
-                {
-                    Bug ticket = new Bug(sR.ReadLine());
-                    //tickets.Add(ticket);
-                }
-                sR.Close();
+                ui.FillBugList(bugs, tickets);
+                ui.FillEnhancementList(enhancements, tickets);
+                ui.FillTaskList(tasks, tickets);
+
                 if (userInput == "1")//view bug tickets
                 {
-                    int lines = 0;
-                    
-                    
-                    foreach (Ticket t in tickets)
-                    {
-                        string format = "{0,-10}\t{1,-25}\t{2,-10}\t{3,-10}\t{4,-10}\t{5,-10}\t{6,-40}";
-                        if(lines == 0)
-                        {
-                            Console.WriteLine(format, "TicketID", "Summary", "Status", "Priority", "Submitter", "Assigned", "Watching");
-                            Console.WriteLine(format, "-------", "-------", "-------", "-------", "-------", "-------", "-------");
-                            lines++;
-                        }
-                        Console.WriteLine(ui.Table(t));
-                    }
-                    
-                    Console.WriteLine("Press any key to proceed");
-                    Console.ReadKey();
+                    ui.BugTable(bugs);
                 }
-                else if (userInput == "2")//create new ticket
+                else if(userInput == "2")//view enhancements
                 {
-                    int ticketID = 0;
-                    foreach(Ticket ticket in tickets)
-                    {
-                        if(ticket.ID > ticketID)
-                        {
-                            ticketID = ticket.ID;
-                        }
-                    }
-                    tickets.Add(Bug.CreateBug(ticketID));
-                    StreamWriter sW = new StreamWriter(bugFile, true);
-                    foreach(Ticket ticket in tickets)
-                    {
-                        string newTicket = Bug.BugCSVFormat(ticket);
-                        sW.WriteLine(newTicket);
-                    }
+                    ui.EnhancementTable(enhancements);
+                }
+                else if(userInput == "3")//view tasks
+                {
+                    ui.TaskTable(tasks);
+                }
+                else if(userInput == "4")//search tickets
+                {
+
+                    List<Ticket> search = tickets.OrderBy(x => x.Priority == "High").ToList();
+                    int o = search.Count();
+                    Console.WriteLine(o);
+                    Console.ReadLine();
+                }
+                else if (userInput == "5")//create new bug ticket
+                {
+                    
+                    Bug newBug = Bug.CreateBug(ui.GetID(bugs, enhancements, tasks));
+                    bugs.Add(newBug);
+                    tickets.Add(newBug);
+                    StreamWriter sW = new StreamWriter("Tickets.csv", true);
+                    sW.WriteLine(newBug.BugCSVFormat());
                     sW.Close();
                 }
-                else if (userInput == "3")//exit app
+                else if(userInput == "6")//create new enhancement ticket
+                {
+                    Enhancement newEnhancement = Enhancement.CreateEnhancement(ui.GetID(bugs, enhancements, tasks));
+                    enhancements.Add(newEnhancement);
+                    tickets.Add(newEnhancement);
+                    StreamWriter sW = new StreamWriter("Enhancements.csv", true);
+                    sW.WriteLine(newEnhancement.EnhancementCSVFormat());
+                    sW.Close();
+                }
+                else if(userInput == "7")//create new task ticket
+                {
+                    Task newTask = Task.CreateTask(ui.GetID(bugs, enhancements, tasks));
+                    tasks.Add(newTask);
+                    tickets.Add(newTask);
+                    StreamWriter sW = new StreamWriter("Tasks.csv", true);
+                    sW.WriteLine(newTask.TaskCSVFormat());
+                    sW.Close();
+                }
+                else if (userInput == "8")//exit app
                 {
                     exit = true;
                 }
